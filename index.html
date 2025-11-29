@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 
@@ -15,15 +17,10 @@
         /* 1. 整體配色方案 - 摩蘭迪質感風 */
         :root {
             --main-color: #F5F1EC;
-            /* 暖米白色 - 卡片背景 */
             --secondary-color: #A78C70;
-            /* 溫和咖啡棕 - 邊框/重要標籤 */
             --bg-color: #FAF8F3;
-            /* 輕盈奶白色 - 整體背景 */
             --text-color: #5C4632;
-            /* 深可可色 - 主要文字 */
             --button-color: #C4A484;
-            /* 柔和太妃糖色 - 強調/按鈕 */
         }
 
         * {
@@ -41,39 +38,29 @@
             overflow-x: hidden;
         }
 
-        h1,
-        h2,
-        h3,
-        .hero-desc,
-        .hero-temp {
+        h1, h2, h3, .hero-desc, .hero-temp {
             font-family: 'Noto Serif TC', serif;
         }
 
-        /* 淡入上滑動畫效果 */
         @keyframes fadeInSlideUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* 新增的浮入動畫 */
         @keyframes fadeInAndFloat {
             from {
                 opacity: 0;
                 transform: translate(-50%, -30%) scale(0.9);
-                /* 從稍下方淡入並略縮小 */
             }
-
             to {
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(1);
-                /* 浮動到最終位置，大小正常 */
             }
         }
 
@@ -118,7 +105,6 @@
             margin: 0 auto;
         }
 
-        /* Banner 容器樣式 (滿版 + 響應式高度) */
         .banner-container {
             width: 100vw;
             position: relative;
@@ -126,17 +112,14 @@
             right: 50%;
             margin-left: -50vw;
             margin-right: -50vw;
-
             height: 0;
             padding-bottom: 35%;
-
             overflow: hidden;
             box-shadow: 0 3px 10px rgba(92, 70, 50, 0.15);
             opacity: 0;
             animation: fadeInSlideUp 0.8s ease-out forwards;
         }
 
-        /* 圖片元素樣式 */
         .banner-img {
             position: absolute;
             top: 0;
@@ -147,26 +130,20 @@
             display: block;
         }
 
-        /* Banner 上的文字樣式 */
         .banner-text {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            /* 精確居中，初始動畫會改變這個 */
             z-index: 10;
             color: white;
             font-family: Arial, sans-serif;
-            /* 更改為 Arial 字體 */
             font-size: clamp(1.8rem, 8vw, 3.5rem);
             font-weight: 700;
             text-shadow: 0 0 5px rgba(99, 97, 97, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
             white-space: nowrap;
-
             opacity: 0;
-            /* 初始不可見 */
             animation: fadeInAndFloat 1.5s ease-out 1s forwards;
-            /* 應用浮入動畫，延遲 1 秒後開始 */
         }
 
         .hero-card {
@@ -205,7 +182,6 @@
             font-family: 'Noto Sans TC', sans-serif;
         }
 
-        /* 預設 (手機) 佈局 */
         .hero-temp-container {
             display: flex;
             justify-content: flex-start;
@@ -217,7 +193,6 @@
 
         .hero-icon {
             font-size: 5rem;
-            animation: bounce 3s infinite;
         }
 
         .hero-temp {
@@ -226,7 +201,6 @@
             color: var(--text-color);
         }
 
-        /* --- 高度/寬度響應式優化 (適用於 > 768px 寬度) --- */
         @media (min-width: 768px) {
             .hero-card {
                 display: flex;
@@ -272,11 +246,7 @@
                 margin-top: 20px;
                 order: 5;
             }
-
         }
-
-        /* --- 響應式優化結束 --- */
-
 
         .hero-desc {
             text-align: left;
@@ -305,7 +275,6 @@
             margin-right: 5px;
             font-size: 1.2em;
         }
-
 
         .advice-grid {
             display: grid;
@@ -415,7 +384,7 @@
 
 <body>
     <div id="loading" class="loading-screen">
-        <div style="font-size: 4rem; animation: bounce 2s infinite; color: var(--secondary-color);">🌤️</div>
+        <div style="font-size: 4rem; color: var(--secondary-color);">🌤️</div>
         <p style="color: var(--text-color); font-weight: bold; margin-top: 20px;">正在觀測雲的流動...</p>
     </div>
 
@@ -425,15 +394,13 @@
             <option value="taichung">臺中</option>
             <option value="tainan">臺南</option>
         </select>
-
         <div id="updateTime" class="update-pill">更新中...</div>
     </div>
 
     <div class="container" id="mainContent" style="display:none;">
         <div class="banner-container">
-            <img id="bannerImg" class="banner-img" src="images/dominik-schroder-FIKD9t5_5zQ-unsplash.jpg" alt="美麗的麥田風景"
-                title="文青感氣象圖">
-
+            <img id="bannerImg" class="banner-img" src="images/dominik-schroder-FIKD9t5_5zQ-unsplash.jpg" 
+                 alt="美麗的麥田風景" title="文青感氣象圖">
             <div id="bannerText" class="banner-text">
                 <p>Hello, how are you?</p>
             </div>
@@ -470,12 +437,25 @@
             return "🌤️";
         }
 
+        // 修正:處理可能帶有 % 符號的降雨機率
+        function parseValue(value) {
+            if (typeof value === 'string') {
+                return value.replace('%', '').replace('°C', '').trim();
+            }
+            return value;
+        }
+
         function getAdvice(rainProb, maxTemp) {
+            const rain = parseInt(parseValue(rainProb));
+            const temp = parseInt(parseValue(maxTemp));
+            
             let rainText = "放心出門啦";
-            if (parseInt(rainProb) > 30) rainText = "記得帶傘哦";
+            if (rain > 30) rainText = "記得帶傘哦";
+            
             let clothText = "舒適穿搭";
-            if (parseInt(maxTemp) >= 28) clothText = "短袖出發";
-            else if (parseInt(maxTemp) <= 20) clothText = "加件外套";
+            if (temp >= 28) clothText = "短袖出發";
+            else if (temp <= 20) clothText = "加件外套";
+            
             return { rainText, clothText };
         }
 
@@ -495,14 +475,18 @@
                     new Promise(r => setTimeout(r, 1000)),
                     fetch(API_URL).then(res => res.json())
                 ]);
+                
+                console.log('API 回應:', json); // 除錯用
+                
                 if (json.success) {
                     renderWeather(json.data);
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('mainContent').style.display = 'block';
                 } else throw new Error("API Error");
             } catch (e) {
-                console.error(e);
+                console.error('錯誤詳情:', e);
                 alert("天氣資料讀取失敗！請稍後再試。");
+                document.getElementById('loading').style.display = 'none';
             }
         }
 
@@ -510,12 +494,15 @@
             const forecasts = data.forecasts;
             const current = forecasts[0];
             const others = forecasts.slice(1);
-            const period = getTimePeriod(current.startTime);
-            const avgTemp = Math.round((parseInt(current.maxTemp) + parseInt(current.minTemp)) / 2);
+            
+            // 修正:處理溫度資料
+            const minTemp = parseInt(parseValue(current.minTemp));
+            const maxTemp = parseInt(parseValue(current.maxTemp));
+            const avgTemp = Math.round((minTemp + maxTemp) / 2);
+            
             const advice = getAdvice(current.rain, current.maxTemp);
             const mood = getMoodText(current.weather);
             const cityDisplay = document.getElementById("citySelect").options[document.getElementById("citySelect").selectedIndex].text.split(' ')[0];
-
 
             document.getElementById("heroCard").innerHTML = `
                 <div class="hero-card" id="currentWeatherCard">
@@ -544,22 +531,27 @@
             const scrollContainer = document.getElementById("futureForecasts");
             scrollContainer.innerHTML = '';
             const todayDate = new Date().getDate();
+            
             others.forEach(f => {
                 let p = getTimePeriod(f.startTime);
                 const fDate = new Date(f.startTime);
                 if (fDate.getDate() !== todayDate) p = "明日" + p;
+                
+                const fMinTemp = parseValue(f.minTemp);
+                const fMaxTemp = parseValue(f.maxTemp);
+                const fRain = parseValue(f.rain);
+                
                 scrollContainer.innerHTML += `
                     <div class="mini-card">
                         <div class="mini-time">${p}</div>
                         <div class="mini-icon">${getWeatherIcon(f.weather)}</div>
-                        <div class="mini-temp">${f.minTemp}°-${f.maxTemp}°</div>
-                        <div style="font-size:0.75rem;color:var(--secondary-color);margin-top:5px;font-family:'Noto Sans TC', sans-serif;">💧機率 ${f.rain}%</div>
+                        <div class="mini-temp">${fMinTemp}°-${fMaxTemp}°</div>
+                        <div style="font-size:0.75rem;color:var(--secondary-color);margin-top:5px;font-family:'Noto Sans TC', sans-serif;">💧機率 ${fRain}%</div>
                     </div>
                 `;
             });
 
             scrollContainer.classList.add('animate');
-
 
             const now = new Date();
             const month = now.getMonth() + 1;
@@ -570,13 +562,14 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => fetchWeather("taipei"));
+        
         document.getElementById("citySelect").addEventListener("change", (e) => {
             document.getElementById('heroCard').innerHTML = '';
             document.getElementById('futureForecasts').innerHTML = '';
             document.getElementById('futureForecasts').classList.remove('animate');
 
             const selectedOption = e.target.options[e.target.selectedIndex];
-            selectedOption.text = selectedOption.text.split(' ')[0] + ' - 駐足中';
+            selectedOption.text = selectedOption.text.split(' ')[0] + ' - 駐足中▾';
             Array.from(e.target.options).forEach(opt => {
                 if (opt !== selectedOption) {
                     opt.text = opt.text.split(' ')[0];
